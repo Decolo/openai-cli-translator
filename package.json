@@ -5,9 +5,15 @@
   "bin": {
     "translator": "./bin/index.js"
   },
-  "main": "index.js",
+  "types": "./lib/cjs/types/index.d.ts",
+  "main": "./lib/cjs/index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "ts-node ./test/test.ts",
+    "clean": "rm -rf ./lib",
+    "build": "npm run clean && npm run build:esm && npm run build:cjs",
+    "build:esm": "tsc -p ./configs/tsconfig.esm.json && mv lib/esm/index.js lib/esm/index.mjs",
+    "build:cjs": "tsc -p ./configs/tsconfig.cjs.json",
+    "prepack": "npm run build"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +21,29 @@
   "dependencies": {
     "openai": "^3.3.0",
     "dotenv": "^16.3.1",
-    "yargs": "^17.7.2",
+    "yargs": "^17.7.1",
     "ora": "^5",
     "chalk": "^3"
-  }
+  },
+  "devDependencies": {
+    "typescript": "^5.1.6",
+    "@types/node": "^20.4.2",
+    "@types/yargs": "^17.0.24",
+    "ts-node": "^10.9.1"
+  },
+  "exports": {
+    ".": {
+      "import": {
+        "types": "./lib/esm/types/index.d.ts",
+        "default": "./lib/esm/index.mjs"
+      },
+      "require": {
+        "types": "./lib/cjs/types/index.d.ts",
+        "default": "./lib/cjs/index.js"
+      }
+    }
+  },
+  "files": [
+    "lib/**/*"
+  ]
 }
