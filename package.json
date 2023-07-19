@@ -21,7 +21,7 @@
   "dependencies": {
     "openai": "^3.3.0",
     "dotenv": "^16.3.1",
-    "yargs": "^17.7.1",
+    "commander": "^11.0.0",
     "ora": "^5",
     "chalk": "^3"
   },
