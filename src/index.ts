@@ -20,7 +20,6 @@ export const run = async ({
 }) => {
   if (!token) {
     if (fs.existsSync(getCWD("./cache.json"))) {
-      debugger
       // @ts-ignore
       const { _token } = await import(getCWD("./cache.json"));
       token = _token;
@@ -28,7 +27,6 @@ export const run = async ({
   } else {
     fs.writeFileSync(getCWD("./cache.json"), JSON.stringify({ _token: token }));
   }
-  debugger
   if (!token) {
     console.log(
       chalk.red(
