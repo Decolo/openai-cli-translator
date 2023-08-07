@@ -2,4 +2,6 @@
 npm install -g decolo/ai-cli-translator
 
 ## How to use?
-translat 你好
+translate -l <target_language, default en> -k <your openai apikey> <your content>
+
+translate 你好
