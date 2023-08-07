@@ -6,7 +6,7 @@ import chalk from "chalk";
 import 'dotenv/config';
 
 const getPathRelativeToProject = (_path: string) => {
-  return path.resolve(path.resolve(), _path);
+  return path.resolve(__dirname, _path);
 }
 
 export const run = async ({
