@@ -2,8 +2,8 @@
 const { program } = require('commander');
 
 program
-  .option('-l, --language <char>')
-  .option('-k, --key <char>');
+  .option('-l, --language <char>', 'which target language translate to', 'en')
+  .option('-k, --key <char>', 'provide openai apikey');
 
 program.parse();
 

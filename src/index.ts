@@ -5,8 +5,8 @@ import ora from "ora";
 import chalk from "chalk";
 import 'dotenv/config';
 
-const getCWD = (_path: string) => {
-  return path.resolve(process.cwd(), _path);
+const getPathRelativeToProject = (_path: string) => {
+  return path.resolve(path.resolve(), _path);
 }
 
 export const run = async ({
@@ -19,13 +19,13 @@ export const run = async ({
   token?: string
 }) => {
   if (!token) {
-    if (fs.existsSync(getCWD("./cache.json"))) {
+    if (fs.existsSync(getPathRelativeToProject("./cache.json"))) {
       // @ts-ignore
-      const { _token } = await import(getCWD("./cache.json"));
+      const { _token } = await import(getPathRelativeToProject("./cache.json"));
       token = _token;
     }
   } else {
-    fs.writeFileSync(getCWD("./cache.json"), JSON.stringify({ _token: token }));
+    fs.writeFileSync(getPathRelativeToProject("./cache.json"), JSON.stringify({ _token: token }));
   }
   if (!token) {
     console.log(
